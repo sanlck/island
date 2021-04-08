@@ -63,7 +63,7 @@ public class CodeGenerator {
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(null);
-        pc.setParent("com.caelan.island");
+        pc.setParent("com.caelan");
         mpg.setPackageInfo(pc);
 
         // 自定义配置
