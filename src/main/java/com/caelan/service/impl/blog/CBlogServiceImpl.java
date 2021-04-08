@@ -1,8 +1,8 @@
-package com.caelan.service.impl;
+package com.caelan.service.impl.blog;
 
-import com.caelan.entity.CBlog;
-import com.caelan.mapper.CBlogMapper;
-import com.caelan.service.CBlogService;
+import com.caelan.entity.blog.CBlog;
+import com.caelan.mapper.blog.CBlogMapper;
+import com.caelan.service.blog.CBlogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

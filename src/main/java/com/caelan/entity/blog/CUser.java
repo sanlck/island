@@ -1,4 +1,4 @@
-package com.caelan.entity;
+package com.caelan.entity.blog;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

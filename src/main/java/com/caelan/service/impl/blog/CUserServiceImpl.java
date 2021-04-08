@@ -1,8 +1,8 @@
-package com.caelan.service.impl;
+package com.caelan.service.impl.blog;
 
-import com.caelan.entity.CUser;
-import com.caelan.mapper.CUserMapper;
-import com.caelan.service.CUserService;
+import com.caelan.entity.blog.CUser;
+import com.caelan.mapper.blog.CUserMapper;
+import com.caelan.service.blog.CUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

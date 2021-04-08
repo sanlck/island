@@ -1,8 +1,7 @@
-package com.caelan.entity;
+package com.caelan.entity.Jx3;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,24 +18,25 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class CBlog implements Serializable {
+public class Jx3Statements implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 唯一标识
+     */
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
-    private Long userId;
+    /**
+     * 骚话
+     */
+    private String statemt;
 
-    private String title;
-
-    private String description;
-
-    private String content;
-
-    private LocalDateTime created;
-
-    private Integer status;
+    /**
+     * 创建时间
+     */
+    private String datetime;
 
 
 }

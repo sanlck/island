@@ -1,6 +1,6 @@
-package com.caelan.service;
+package com.caelan.service.blog;
 
-import com.caelan.entity.CUser;
+import com.caelan.entity.blog.CUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

@@ -1,4 +1,4 @@
-package com.caelan.controller;
+package com.caelan.controller.blog;
 
 
 import cn.hutool.core.map.MapUtil;
@@ -6,8 +6,8 @@ import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.caelan.common.dto.LoginDto;
 import com.caelan.common.lang.Result;
-import com.caelan.entity.CUser;
-import com.caelan.service.CUserService;
+import com.caelan.entity.blog.CUser;
+import com.caelan.service.blog.CUserService;
 import com.caelan.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -17,8 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-
-import static com.sun.xml.internal.ws.api.model.wsdl.WSDLBoundOperation.ANONYMOUS.required;
 
 /**
  * <p>

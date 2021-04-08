@@ -1,4 +1,4 @@
-package com.caelan.controller;
+package com.caelan.controller.blog;
 
 
 import cn.hutool.core.bean.BeanUtil;
@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.caelan.common.lang.Result;
-import com.caelan.entity.CBlog;
-import com.caelan.service.CBlogService;
+import com.caelan.entity.blog.CBlog;
+import com.caelan.service.blog.CBlogService;
 import com.caelan.util.ShiroUtil;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
