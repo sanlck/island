@@ -38,5 +38,5 @@ public class Jx3Statements implements Serializable {
      */
     private String datetime;
 
-
+    private String type;
 }
