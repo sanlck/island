@@ -2,8 +2,8 @@ package com.caelan.shiro;
 
 import cn.hutool.core.bean.BeanUtil;
 
-import com.caelan.entity.blog.CUser;
-import com.caelan.service.blog.CUserService;
+import com.caelan.entity.CUser;
+import com.caelan.service.CUserService;
 import com.caelan.util.JwtUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

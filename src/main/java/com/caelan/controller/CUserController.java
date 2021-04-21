@@ -1,4 +1,4 @@
-package com.caelan.controller.blog;
+package com.caelan.controller;
 
 
 import cn.hutool.core.map.MapUtil;
@@ -6,8 +6,9 @@ import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.caelan.common.dto.LoginDto;
 import com.caelan.common.lang.Result;
-import com.caelan.entity.blog.CUser;
-import com.caelan.service.blog.CUserService;
+import com.caelan.entity.CUser;
+import com.caelan.entity.Jx3.Jx3Statements;
+import com.caelan.service.CUserService;
 import com.caelan.util.JwtUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -17,6 +18,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -40,7 +45,6 @@ public class CUserController {
     }
 
     @PostMapping(path = "/save", produces = "application/json")
-
     public Result save(@Validated @RequestBody CUser user) {
         return Result.succ(user);
     }
@@ -72,4 +76,28 @@ public class CUserController {
         SecurityUtils.getSubject().logout();
         return Result.succ(null);
     }
+
+    /**
+     * 创建剑三用户
+     * @param user
+     * @return
+     */
+    @PostMapping(path = "/addJx3", produces = "application/json")
+    public Result addJx3(@Validated @RequestBody CUser user) {
+        if((null!=user.getUsername() && user.getUsername().length()>0)
+            && (null!=user.getPassword() && user.getPassword().length()>0)){
+            //用户名是否存在
+            List<CUser> user1=CUserService.selectByUserName(user);
+            user.setCode(UUID.randomUUID().toString());
+            user.setStatus(1);
+            user.setCreated(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            user.setRole("jx3");
+            int in=CUserService.insert(user);
+            return Result.succ(in);
+        }else{
+            return Result.fail("用户名或密码不能为空");
+        }
+
+    }
+
 }

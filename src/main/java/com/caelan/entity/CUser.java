@@ -1,4 +1,4 @@
-package com.caelan.entity.blog;
+package com.caelan.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -39,13 +39,14 @@ public class CUser implements Serializable {
 
     private Integer status;
 
-    private LocalDateTime created;
+    private String created;
 
-    private LocalDateTime lastLogin;
+    private String lastLogin;
 
     private String ip;
 
     private String mac;
-
+    private String code;
+    private String role;
 
 }

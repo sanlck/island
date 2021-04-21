@@ -1,6 +1,6 @@
-package com.caelan.mapper.blog;
+package com.caelan.mapper;
 
-import com.caelan.entity.blog.CUser;
+import com.caelan.entity.CUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
