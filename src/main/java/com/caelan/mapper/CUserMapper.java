@@ -1,5 +1,6 @@
 package com.caelan.mapper;
 
+import com.caelan.common.dto.updatePwddto;
 import com.caelan.entity.CUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -12,5 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2021-04-07
  */
 public interface CUserMapper extends BaseMapper<CUser> {
+    int updatePwd(updatePwddto updatePwddto);
 
+    int updateCode(CUser user);
 }

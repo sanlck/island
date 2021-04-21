@@ -1,6 +1,7 @@
-package com.caelan.service.impl.blog;
+package com.caelan.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.caelan.common.dto.updatePwddto;
 import com.caelan.entity.CUser;
 import com.caelan.mapper.CUserMapper;
 import com.caelan.service.CUserService;
@@ -25,14 +26,26 @@ public class CUserServiceImpl extends ServiceImpl<CUserMapper, CUser> implements
     CUserMapper cUserMapper;
     @Override
     public int insert(CUser user) {
-        cUserMapper.insert(user);
-        return 0;
+        int in=cUserMapper.insert(user);
+        return in;
     }
 
     @Override
     public List<CUser> selectByUserName(CUser user) {
-        List<CUser> users=cUserMapper.selectList(new QueryWrapper<CUser>().select("username",user.getUsername().trim()));
+        List<CUser> users=cUserMapper.selectList(new QueryWrapper<CUser>().eq("username",user.getUsername().trim()));
         return users;
+    }
+
+    @Override
+    public int updatePwd(updatePwddto updatePwddto) {
+        int in =cUserMapper.updatePwd(updatePwddto);
+        return in;
+    }
+
+    @Override
+    public int updateCode(CUser user) {
+        int in =cUserMapper.updateCode(user);
+        return in;
     }
 
 
