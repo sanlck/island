@@ -15,7 +15,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -68,17 +70,17 @@ public class Jx3PveitemController {
     @GetMapping("/getByCode")
     @ResponseBody
     public Result getByCode(@Validated @RequestBody Jx3Pveitem jx3Pveitem,Integer currentPage) {
-        Wrapper<Jx3Pveitem> jx3PveitemWrapper1;
+        List<Jx3Pveitem> Jx3Pveitem=new ArrayList<>();
         if(null!=jx3Pveitem.getCode() && jx3Pveitem.getCode().trim().length()>0){
-            jx3PveitemWrapper1=jx3PveitemService.getByCode(jx3Pveitem);
+            Jx3Pveitem=jx3PveitemService.getByCode(jx3Pveitem);
         }else{
             return Result.fail("识别码不能为空");
         }
         if(currentPage == null || currentPage < 1) currentPage = 1;
         Page page = new Page(currentPage, 20);
 
-        IPage pageData = jx3PveitemService.page(page,jx3PveitemWrapper1);
-        return Result.succ(pageData);
+//        IPage pageData = jx3PveitemService.pageMaps(page,jx3Pveitem);
+        return Result.succ(Jx3Pveitem);
     }
 
     @PostMapping("/add")

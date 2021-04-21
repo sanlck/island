@@ -1,8 +1,9 @@
 package com.caelan.service.Jx3;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.caelan.entity.Jx3.Jx3Pveitem;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -20,5 +21,5 @@ public interface Jx3PveitemService extends IService<Jx3Pveitem> {
 
     int delete(String id);
 
-    Wrapper<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem);
+    List<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem);
 }

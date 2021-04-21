@@ -1,8 +1,9 @@
 package com.caelan.mapper.Jx3;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.caelan.entity.Jx3.Jx3Pveitem;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +17,5 @@ public interface Jx3PveitemMapper extends BaseMapper<Jx3Pveitem> {
 
     int updatepve(Jx3Pveitem jx3Pveitem);
 
-    Wrapper<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem);
+    List<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem);
 }

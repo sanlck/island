@@ -2,12 +2,13 @@ package com.caelan.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.caelan.entity.Jx3.Jx3Pveitem;
-import com.caelan.entity.Jx3.Jx3Statements;
 import com.caelan.mapper.Jx3.Jx3PveitemMapper;
 import com.caelan.service.Jx3.Jx3PveitemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -41,8 +42,8 @@ public class Jx3PveitemServiceImpl extends ServiceImpl<Jx3PveitemMapper, Jx3Pvei
     }
 
     @Override
-    public Wrapper<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem) {
-        Wrapper<Jx3Pveitem> jx3PveitemWrapper=jx3PveitemMapper.getByCode(jx3Pveitem);
+    public List<Jx3Pveitem> getByCode(Jx3Pveitem jx3Pveitem) {
+        List<Jx3Pveitem> jx3PveitemWrapper=jx3PveitemMapper.getByCode(jx3Pveitem);
         return jx3PveitemWrapper;
     }
 }

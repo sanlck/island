@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caelan.mapper.Jx3.Jx3PveitemMapper">
     <!--识别码-->
-    <update id="updatepve" parameterType="com.caelan.entity.Jx3Pveitem">
+    <update id="updatepve" parameterType="com.caelan.entity.Jx3.Jx3Pveitem">
         update jx3_pveitem set nametype=#{nametype,jdbcType=VARCHAR},statustype=#{statustype,jdbcType=VARCHAR}
-                    ,name=#{name,jdbcType=VARCHAR} ,reason=#{reason,jdbcType=VARCHAR} where id=#{id,jdbcType=bigint}
+                    ,name=#{name,jdbcType=VARCHAR} ,reason=#{reason,jdbcType=VARCHAR} where id=#{id,jdbcType=BIGINT}
     </update>
 
-    <select id="getByCode" parameterType="Long"  resultType="com.caelan.entity.Jx3Pveitem">
+    <select id="getByCode" parameterType="com.caelan.entity.Jx3.Jx3Pveitem"  resultType="com.caelan.entity.Jx3.Jx3Pveitem">
         SELECT
             a.*
         FROM
