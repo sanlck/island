@@ -1,9 +1,10 @@
 package com.caelan.entity.Jx3;
 
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -16,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Jx3zh implements Serializable {
+public class Jx3zhPage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +25,7 @@ public class Jx3zh implements Serializable {
 
     private String username;
     private String savetime;
+    Integer currentPage;
 
 
 }

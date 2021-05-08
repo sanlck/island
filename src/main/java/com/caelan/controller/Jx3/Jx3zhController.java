@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.caelan.common.lang.Result;
 import com.caelan.entity.CUser;
-import com.caelan.entity.Jx3.Jx3Goldprice;
-import com.caelan.entity.Jx3.Jx3Statements;
-import com.caelan.entity.Jx3.Jx3zh;
+import com.caelan.entity.Jx3.*;
 import com.caelan.service.CUserService;
 import com.caelan.service.Jx3.Jx3GoldpriceService;
 import com.caelan.service.Jx3.Jx3zhService;
@@ -52,7 +50,7 @@ public class Jx3zhController {
             if(null==cUsers || cUsers.getUsername().trim().length()<=0){
                 return Result.fail("用户不存在");
             }
-            jx3zh.setSavatime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            jx3zh.setSavetime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             boolean re=jx3zhService.save(jx3zh);
             if(re){
                 return Result.succ(re);
@@ -65,16 +63,19 @@ public class Jx3zhController {
 
     }
     /**
-     * 根据用户名查询账号
-     * @param jx3zh
+     * 根据用户名查询账号(分页)
+     * @param jx3zhPage
      * @return
      */
-    @GetMapping("/getzh")
+    @PostMapping("/getzh")
     @ResponseBody
-    public Result GetZh(@Validated @RequestBody Jx3zh jx3zh) {
-        if(null!=jx3zh.getUsername() && jx3zh.getUsername().trim().length()>0){
-            List<Jx3zh> jx3zhs=jx3zhService.list(new QueryWrapper<Jx3zh>().eq("username",jx3zh.getUsername().trim()));
-            return Result.succ(jx3zhs);
+    public Result GetZh(@Validated @RequestBody Jx3zhPage jx3zhPage) {
+        Integer currentPage=jx3zhPage.getCurrentPage();
+        if(null!=jx3zhPage.getUsername() && jx3zhPage.getUsername().trim().length()>0){
+            if(currentPage == null || currentPage < 1) currentPage = 1;
+            Page page = new Page(currentPage, 20);
+            IPage pageData =jx3zhService.page(page,new QueryWrapper<Jx3zh>().eq("username",jx3zhPage.getUsername().trim()).orderByDesc("savetime"));
+            return Result.succ(pageData);
         }else{
             return Result.fail("用户名不能为空");
         }
