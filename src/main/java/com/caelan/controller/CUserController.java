@@ -144,7 +144,11 @@ public class CUserController {
     @SneakyThrows
     @PostMapping(path = "/updateCode", produces = "application/json")
     public Result updateCode(@Validated @RequestBody CUser user) {
-
+        CUser users = CUserService.getOne(new QueryWrapper<CUser>().eq("username", user.getUsername()));
+        Assert.notNull(user, "用户不存在");
+        if(!MD5Util.validPasswd(user.getPassword(),users.getPassword())) {
+            return Result.fail("用户名或密码错误！");
+        }
         CUser user2;
         String uuid="";
         do{

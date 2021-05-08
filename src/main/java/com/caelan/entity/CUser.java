@@ -41,8 +41,7 @@ public class CUser implements Serializable {
 
     private String created;
 
-    private String lastLogin;
-
+    private String lastlogin;
     private String ip;
 
     private String mac;

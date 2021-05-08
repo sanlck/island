@@ -1,4 +1,4 @@
-package com.caelan.service.impl;
+package com.caelan.service.impl.Jx3;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.caelan.entity.Jx3.Jx3Pveitem;
