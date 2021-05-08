@@ -8,6 +8,7 @@ import com.caelan.common.lang.Result;
 import com.caelan.entity.Jx3.Jx3Statements;
 import com.caelan.entity.Jx3.Jx3czjl;
 import com.caelan.entity.Jx3.Jx3zh;
+import com.caelan.entity.Jx3.Jx3zhPage;
 import com.caelan.service.Jx3.Jx3czjlService;
 import com.caelan.service.Jx3.Jx3zhService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,13 @@ public class Jx3czjlController {
 
     /**
      * 冲销记录查询
-     * @param currentPage
+     * @param jx3zhPage
      * @return
      */
     @PostMapping("/gets")
     @ResponseBody
-    public Result Gets(Integer currentPage,@Validated @RequestBody Jx3zh jx3zh) {
-        List<Jx3zh> jx3zhs=jx3zhService.list(new QueryWrapper<Jx3zh>().eq("username",jx3zh.getUsername()));
+    public Result Gets(@Validated @RequestBody Jx3zhPage jx3zhPage) {
+        List<Jx3zh> jx3zhs=jx3zhService.list(new QueryWrapper<Jx3zh>().eq("username",jx3zhPage.getUsername()));
         List<String> Stringlist=new ArrayList<String>();
         if(null==jx3zhs || jx3zhs.size()==0){
             return Result.fail("用户名下没有账号或者用户名不存在");
@@ -49,6 +50,7 @@ public class Jx3czjlController {
         for (int i=0; i<jx3zhs.size();i++){
             Stringlist.add(jx3zhs.get(i).getZhname());
         }
+        Integer currentPage=jx3zhPage.getCurrentPage();
         if(currentPage == null || currentPage < 1) currentPage = 1;
         Page page = new Page(currentPage, 20);
         IPage pageData = jx3czjlService.page(page, new QueryWrapper<Jx3czjl>().in("zh",Stringlist).orderByDesc("ordertime"));
