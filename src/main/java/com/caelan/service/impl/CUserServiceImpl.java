@@ -48,6 +48,12 @@ public class CUserServiceImpl extends ServiceImpl<CUserMapper, CUser> implements
         return in;
     }
 
+    @Override
+    public int activate(CUser cuser) {
+        int in =cUserMapper.activate(cuser);
+        return in;
+    }
+
 
 }
 

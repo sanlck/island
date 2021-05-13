@@ -25,4 +25,6 @@ public interface CUserService extends IService<CUser> {
     int updatePwd(updatePwddto updatePwddto);
 
     int updateCode(CUser user);
+
+    int activate(CUser cuser);
 }

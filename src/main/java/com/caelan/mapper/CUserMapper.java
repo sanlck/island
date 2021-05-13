@@ -16,4 +16,6 @@ public interface CUserMapper extends BaseMapper<CUser> {
     int updatePwd(updatePwddto updatePwddto);
 
     int updateCode(CUser user);
+
+    int activate(CUser cuser);
 }

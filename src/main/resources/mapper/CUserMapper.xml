@@ -10,4 +10,10 @@
     <update id="updateCode" parameterType="com.caelan.entity.CUser">
         update c_user set code=#{code,jdbcType=VARCHAR} where username=#{username,jdbcType=VARCHAR}
     </update>
+
+
+    <!--激活账号-->
+    <update id="activate" parameterType="com.caelan.entity.CUser">
+        update c_user set status='1' where username=#{username,jdbcType=VARCHAR} and email=#{email,jdbcType=VARCHAR}
+    </update>
 </mapper>

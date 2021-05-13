@@ -12,6 +12,8 @@ import com.caelan.entity.Jx3.Jx3Statements;
 import com.caelan.service.CUserService;
 import com.caelan.util.JwtUtils;
 import com.caelan.util.MD5Util;
+import com.caelan.util.MailUtil;
+import com.caelan.util.OtherUtils;
 import lombok.SneakyThrows;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -59,6 +61,9 @@ public class CUserController {
     public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response) {
         CUser user = CUserService.getOne(new QueryWrapper<CUser>().eq("username", loginDto.getUsername()));
         Assert.notNull(user, "用户不存在");
+        if("0".equals(user.getStatus()) || user.getStatus()==0){
+            return Result.fail("用户未激活");
+        }
         if(!MD5Util.validPasswd(loginDto.getPassword(),user.getPassword())) {
             return Result.fail("用户名或密码错误！");
         }
@@ -90,6 +95,9 @@ public class CUserController {
     @SneakyThrows
     @PostMapping(path = "/addJx3", produces = "application/json")
     public Result addJx3(@Validated @RequestBody CUser user) {
+        if(null==user.getEmail() || user.getUsername().length()<=0){
+            return Result.fail("邮箱不能为空");
+        }
         if((null!=user.getUsername() && user.getUsername().length()>0)
             && (null!=user.getPassword() && user.getPassword().length()>0)){
             //用户名是否存在
@@ -97,18 +105,45 @@ public class CUserController {
             if(user1.size()>0){
                 return Result.fail("用户名已存在");
             }
+
+            CUser useremail = CUserService.getOne(new QueryWrapper<CUser>().eq("email", user.getEmail()));
+            if(null!=useremail){
+                return Result.fail("邮箱已注册,请登录");
+            }
             //密码加密
             user.setPassword(MD5Util.getEncryptedPwd(user.getPassword().toString()));
             user.setCode(UUID.randomUUID().toString().replaceAll("-","").toLowerCase());
-            user.setStatus(1);
+            user.setStatus(0);
             user.setCreated(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
             user.setRole("jx3");
             int in=CUserService.insert(user);
-            return Result.succ(in);
+            String code = OtherUtils.hash(user.getUsername(),user.getCreated(),user.getRole());
+            if(in==1){
+                MailUtil.send_jx3(code,user.getEmail());
+                return Result.succ("激活邮件已发送至邮箱，请先激活用户");
+            }
+            return Result.fail("注册失败");
         }else{
             return Result.fail("用户名或密码不能为空");
         }
 
+    }
+
+    @SneakyThrows
+    @GetMapping("/activatedUser/code={code}&email={email}")
+    public Result activatedUser(@PathVariable("code") String code,@PathVariable("email") String email){
+        System.out.println(code);
+        System.out.println(email);
+        CUser Cuser = CUserService.getOne(new QueryWrapper<CUser>().eq("email", email));
+        if(null==Cuser){
+            return  Result.fail("邮箱未注册");
+        }
+        String codeNew = OtherUtils.hash(Cuser.getUsername(),Cuser.getCreated(),Cuser.getRole());
+        if(!codeNew.equals(code)){
+            return  Result.fail("激活失败，请重新发送激活邮件");
+        }
+        int res=CUserService.activate(Cuser);
+        return  Result.succ("激活成功");
     }
 
     /**
