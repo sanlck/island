@@ -7,9 +7,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.caelan.common.lang.Result;
 import com.caelan.entity.Jx3.Jx3Pveitem;
-import com.caelan.entity.Jx3.Jx3Statements;
+import com.caelan.entity.Jx3.Jx3PveitemPage;
 import com.caelan.service.Jx3.Jx3PveitemService;
-import com.caelan.service.Jx3.Jx3StatementsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +35,13 @@ public class Jx3PveitemController {
     /**
      * 根据用户名查询
      * @param jx3Pveitem
-     * @param currentPage
+     * @param
      * @return
      */
-    @GetMapping("/getByName")
+    @PostMapping("/getByName")
     @ResponseBody
-    public Result getByName(@Validated @RequestBody Jx3Pveitem jx3Pveitem,Integer currentPage) {
+    public Result getByName(@Validated @RequestBody Jx3PveitemPage jx3Pveitem) {
+        Integer currentPage=jx3Pveitem.getCurrentPage();
         QueryWrapper<Jx3Pveitem> jx3PveitemWrapper=new QueryWrapper<Jx3Pveitem>();
         if(null!=jx3Pveitem.getUsername() && jx3Pveitem.getUsername().trim().length()>0){
             jx3PveitemWrapper.eq("username",jx3Pveitem.getUsername());
